@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+  <meta name="theme-color" content="#000000">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bulma/0.6.2/css/bulma.min.css" />
+  <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
+  <title>Faucet ERC20</title>
+</head>
+
+<body>
+  <noscript>
+    You need to enable JavaScript to run this app.
+  </noscript>
+  <div id="container is-fluid">
+    <section class="hero is-dark is-fullheight">
+      <div class="hero-body">
+        <div class="container">
+          <h1 class="title">
+            ERC20 automated faucet
+          </h1>
+          <ul style="list-style: none;">
+            <li>Network
+              <b>Kovan</b>
+            </li>
+            <li> Token
+              <a href="https://kovan.etherscan.io/token/0x3b226ff6aad7851d3263e53cb7688d13a07f6e81#readContract">
+                <b>SingularityNET</b>
+              </a>
+            </li>
+            <li>Symbol
+              <b>AGI</b>
+            </li>
+            <li>Decimals
+              <b>8</b>
+            </li>
+          </ul>
+          <div class="field">
+            <label class="label">GIST identifier</label>
+            <div class="control">
+              <input class="input" id="input" type="text" style="width: 200px" placeholder="Enter your gist id">
+              <button class="button is-primary" onClick="sendRequest()">
+                Submit
+              </button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+    const API_SERVER = "https://nd9vvrqz39.execute-api.eu-west-1.amazonaws.com/production/agi"
+    function sendRequest() {
+      const gistId = document.getElementById('input').value
+      if (gistId)
+        axios.post(API_SERVER, { gistId: gistId }, {ContentType:'application/json'})
+          .then(result => console.log(result.data))
+          .catch(console.error)
+    }
+  </script>
+</body>
+</html>
