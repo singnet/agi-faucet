@@ -103,6 +103,8 @@
       
       error.style.display = "none"
       notification.style.display = "none"
+      button.setAttribute("disabled", "disabled")
+      
       if (address.value !== "" && address.value.length === 42) {
         button.innerText = "Loading.."
 
@@ -122,11 +124,13 @@
             }
 
             button.innerText = "Submit"
+            button.removeAttribute("disabled")
           }
         }
         xhr.send()
       } else {
         error.style.display = "block"
+        button.removeAttribute("disabled")
         error.innerHTML = "Insert a valid address"
       }
     }
