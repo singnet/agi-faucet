@@ -1,13 +1,15 @@
 # faucet-erc20
-***Automated faucet for distributing ERC20 Tokens***
+***Automated faucet for distributing SingularityNET (AGI) token***
+
+This faucet allows you to receive up to 1 AGI every 24 hours and requires you to have a github account.
+
+- Symbol `AGI`
+- Decimals `8`
 
 
 ### Networks
 
-* Kovan
-
-### Tokens
-
-* SingularityNET (AGI)
-
-Vulpem Ventures has set up a faucet service that uses Github user ID retrived via OAuth to store an address where your ERC20 Tokens can be sent to. This allows you to receive up to 1 Kovan AGI every 24 hours and requires you to have a github account.
+- [ ] Mainnet  
+- [ ] Ropsten  
+- [x] Kovan [0x3b226ff6aad7851d3263e53cb7688d13a07f6e81](https://kovan.etherscan.io/token/0x3b226ff6aad7851d3263e53cb7688d13a07f6e81) 
+- [ ] Rinkeby  
