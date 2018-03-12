@@ -88,8 +88,9 @@
             window.location.href = "https://github.com/login/oauth/authorize?client_id=" + JSON.parse(xhr.response).clientId
           } else {
             const error = document.getElementById("error")
+
             error.style.display = 'block'
-            error.innerText = "Something went wrong! Reason: " + xhr.responseText   
+            error.innerText = "Something went wrong! Reason: " + xhr.responseText
           }
         }
       }
@@ -120,8 +121,10 @@
               notification.style.display = "block"
               notification.innerHTML = `<p>Success! <br /> Tx Hash: <a href="https://kovan.etherscan.io/tx/${txHash}" target="_blank">${txHash}</a></p>`
             } else {
+              const reason = JSON.parse(xhr.response)
+
               error.style.display = "block"
-              error.innerHTML = "Something went wrong! Reason: " + xhr.responseText
+              error.innerHTML = "Something went wrong! Reason: " + (reason.message || reason.error_description)
             }
 
             button.innerText = "Submit"
