@@ -18,8 +18,12 @@
       <div class="hero-body">
         <div class="container">
           <h1 class="title">
-            ERC20 automated faucet
+              ERC20 automated faucet
           </h1>
+          <h3 id="subtitle" style="display: none">
+            You need a github account to get your AGI
+          </h3>
+          <br />
           <p>
             <a href="https://github.com/vulpemventures/faucet-erc20/blob/master/README.md" target="_blank">
               <strong>README</strong>
@@ -42,14 +46,17 @@
               <b>8</b>
             </li>
           </ul>
+          <br />
           <div class="field">
-            <label class="label">GIST identifier</label>
-            <div class="control">
-              <input class="input" id="input" type="text" style="width: 360px" placeholder="Enter your gist id">
-              <button class="button is-primary" onClick="sendRequest()">
+            <div id="control" class="control" style="display: none">
+              <input class="input" id="input" type="text" style="width: 360px" placeholder="Enter your ETH address">
+              <button id="button" class="button is-primary" onClick="sendRequest()">
                 Submit
               </button>
             </div>
+            <button class="button" id="login" style="display: none" onClick="githubLogin()">
+              Login with Github
+            </button>
           </div>
           <div id="notification" class="notification is-success" style="display:none">
           </div>
@@ -60,28 +67,73 @@
     </section>
   </div>
   <script>
-    const API_SERVER = "https://nd9vvrqz39.execute-api.eu-west-1.amazonaws.com/production/agi"
-    function sendRequest() {
-      const gistId = document.getElementById('input').value
-      const notification = document.getElementById('notification')
-      const error = document.getElementById('error')
-      const xhr = new XMLHttpRequest() // new HttpRequest instance 
-      xhr.open("POST", API_SERVER + '/' + gistId)
+    const BASE_URI = "https://nd9vvrqz39.execute-api.eu-west-1.amazonaws.com/production"
+    // const BASE_URI = "https://jmtb0drpvb.execute-api.eu-west-1.amazonaws.com/staging"
+
+    window.onload = function () {
+      if (location.search !== "") {
+        document.getElementById("control").style.display = "block"
+      } else {
+        document.getElementById("login").style.display = "block"
+        document.getElementById("subtitle").style.display = "block"
+      }
+    }
+    
+    function githubLogin() {
+      const xhr = new XMLHttpRequest()
+      xhr.open("GET", BASE_URI + "/appId") 
       xhr.onload = function (e) {
-        if (xhr.readyState === 4) {
+        if (xhr.readyState === 4) {
           if (xhr.status === 200) {
-            const txHash = JSON.parse(xhr.response).result || ''
-            notification.style.display = 'block'
-            notification.innerHTML = `<p>Success! <br /> Tx Hash: <a href="https://kovan.etherscan.io/tx/${txHash}" target="_blank">${txHash}</a></p>`
+            window.location.href = "https://github.com/login/oauth/authorize?client_id=" + JSON.parse(xhr.response).clientId
           } else {
-            console.error(xhr.responseText)
+            const error = document.getElementById("error")
             error.style.display = 'block'
-            error.innerText = "Something went wrong! Reason: " + xhr.responseText       
+            error.innerText = "Something went wrong! Reason: " + xhr.responseText   
           }
         }
       }
       xhr.send()
+    }
+    
+    function sendRequest() {
+      const button = document.getElementById("button"),
+            address = document.getElementById("input"),
+            error = document.getElementById("error"),
+            notification = document.getElementById("notification")
+      
+      error.style.display = "none"
+      notification.style.display = "none"
+      button.setAttribute("disabled", "disabled")
+      
+      if (address.value !== "" && address.value.length === 42) {
+        button.innerText = "Loading.."
 
+        const xhr = new XMLHttpRequest()
+        xhr.open("POST", `${BASE_URI}/agi/${location.search.split("=")[1]}/${address.value}`)
+        xhr.onload = function (e) {
+          if (xhr.readyState === 4) {
+            if (xhr.status === 200) {
+              const response = JSON.parse(xhr.response).result,
+                    txHash = response.transactionHash || ""
+
+              notification.style.display = "block"
+              notification.innerHTML = `<p>Success! <br /> Tx Hash: <a href="https://kovan.etherscan.io/tx/${txHash}" target="_blank">${txHash}</a></p>`
+            } else {
+              error.style.display = "block"
+              error.innerHTML = "Something went wrong! Reason: " + xhr.responseText
+            }
+
+            button.innerText = "Submit"
+            button.removeAttribute("disabled")
+          }
+        }
+        xhr.send()
+      } else {
+        error.style.display = "block"
+        button.removeAttribute("disabled")
+        error.innerHTML = "Insert a valid address"
+      }
     }
   </script>
 </body>
