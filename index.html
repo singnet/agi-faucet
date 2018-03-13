@@ -1,144 +1,176 @@
 <!DOCTYPE html>
 <html lang="en">
-
-<head>
-  <meta charset="utf-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-  <meta name="theme-color" content="#000000">
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bulma/0.6.2/css/bulma.min.css" />
-  <title>Faucet ERC20</title>
-</head>
-
-<body>
-  <noscript>
-    You need to enable JavaScript to run this app.
-  </noscript>
-  <div id="container is-fluid">
-    <section class="hero is-dark is-fullheight">
-      <div class="hero-body">
-        <div class="container">
-          <h1 class="title">
-              ERC20 automated faucet
-          </h1>
-          <h3 id="subtitle" style="display: none">
-            You need a github account to get your AGI
-          </h3>
-          <br />
-          <p>
-            <a href="https://github.com/vulpemventures/faucet-erc20/blob/master/README.md" target="_blank">
-              <strong>README</strong>
-            </a>
-          </p>
-          <br />
-          <ul style="list-style: none;">
-            <li>Network
-              <b>Kovan</b>
-            </li>
-            <li> Token
-              <a href="https://kovan.etherscan.io/token/0x3b226ff6aad7851d3263e53cb7688d13a07f6e81#readContract">
-                <b>SingularityNET</b>
-              </a>
-            </li>
-            <li>Symbol
-              <b>AGI</b>
-            </li>
-            <li>Decimals
-              <b>8</b>
-            </li>
-          </ul>
-          <br />
-          <div class="field">
-            <div id="control" class="control" style="display: none">
-              <input class="input" id="input" type="text" style="width: 360px" placeholder="Enter your ETH address">
-              <button id="button" class="button is-primary" onClick="sendRequest()">
-                Submit
-              </button>
-            </div>
-            <button class="button" id="login" style="display: none" onClick="githubLogin()">
-              Login with Github
-            </button>
-          </div>
-          <div id="notification" class="notification is-success" style="display:none">
-          </div>
-          <div id="error" class="notification is-danger" style="display:none">
-          </div>
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta name="theme-color" content="#000000">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/antd/3.3.0/antd.css" />
+    <title>Faucet ERC20</title>
+  </head>
+  <body>
+    <noscript>
+      You need to enable JavaScript to run this app.
+    </noscript>
+    <div class="ant-layout" style="min-height: 100vh;">
+      <div class="ant-layout-header" style="background: rgb(35, 13, 58);">
+        <div className="logo">
+          <img src="assets/logo.svg" alt="SingularityNET" />
         </div>
       </div>
-    </section>
-  </div>
-  <script>
-    const BASE_URI = "https://nd9vvrqz39.execute-api.eu-west-1.amazonaws.com/production"
-    // const BASE_URI = "https://jmtb0drpvb.execute-api.eu-west-1.amazonaws.com/staging"
+      <div class="ant-layout-content">
+        <div class="ant-row-flex ant-row-flex-center">
+          <div
+            class="ant-col-xs-24 ant-col-sm-24 ant-col-md-22 ant-col-lg-15 ant-col-xl-18"
+            style="margin-top: 40px;"
+          >
+            <div class="ant-row">
+              <div class="ant-card ant-card-bordered ant-card-wider-padding">
+                <div class="ant-card-head">
+                  <div class="ant-card-head-wrapper">
+                    <div class="ant-card-head-title">
+                      <i class="anticon anticon-gift"></i>
+                      <div class="ant-divider ant-divider-vertical"></div>
+                        ERC20 automated faucet
+                    </div>
+                    <div class="ant-card-extra">
+                        <a href="https://github.com/vulpemventures/faucet-erc20/blob/master/README.md" target="_blank">
+                          README
+                        </a>
+                    </div>
+                  </div>
+                </div>
+                <div class="ant-card-body">
+                  <div class="ant-row-flex ant-row-flex-space-around ant-row-flex-middle">
+                    <div class="ant-col-xs-24 ant-col-sm-7 ant-col-md-7 ant-col-lg-7 ant-col-xl-7">
+                      <p>
+                        Network
+                        <div class="ant-divider ant-divider-vertical"></div>
+                        <div class="ant-tag">Kovan</div>
+                      </p>
+                      <p>
+                        Token
+                        <div class="ant-divider ant-divider-vertical"></div>
+                        <div class="ant-tag">
+                          <a href="https://kovan.etherscan.io/token/0x3b226ff6aad7851d3263e53cb7688d13a07f6e81#readContract">
+                            <b>SingularityNET</b>
+                          </a>
+                        </div>
+                      </p>
+                    </div>
+                    <div class="ant-col-xs-24 ant-col-sm-7 ant-col-md-7 ant-col-lg-7 ant-col-xl-7">
+                      <p>
+                        Symbol
+                        <div class="ant-divider ant-divider-vertical"></div>
+                        <div class="ant-tag">AGI</div>
+                      </p>
+                      <p>
+                        Decimals
+                        <div class="ant-divider ant-divider-vertical"></div>
+                        <div class="ant-tag">8</div>
+                      </p>
+                    </div>
+                    <div class="ant-col-xs-24 ant-col-sm-10 ant-col-md-10 ant-col-lg-10 ant-col-xl-10" style="margin-top: 30px; margin-bottom: 30px;">
+                        <div id="control" style="display: none">
+                          <input id="input" type="text" style="width: 100%" placeholder="Enter your ETH address" class="ant-input">
+                          <button id="button" type="button" onClick="sendRequest()" class="ant-btn ant-btn-primary" style="width: 100%; margin-top: 10px;">
+                            SUBMIT
+                          </button>
+                        </div>
+                        <div id="subtitle" class="ant-alert ant-alert-info ant-alert-no-icon" style="display: none;">
+                          <span class="ant-alert-message">
+                            You need a GitHub account to get your AGI
+                          </span>
+                        </div>
+                        <button type="button" id="login;
+" onClick="githubLogin()" class="ant-btn ant-btn-primary" style="width: 100%; margin-top: 10px; display: none;">
+                          LOGIN
+                        </button>
+                        <div id="notification" class="ant-alert ant-alert-warning ant-alert-no-icon" style="display:none; margin-top: 20px;">
+                        </div>
+                        <div id="error" class="ant-alert ant-alert-error ant-alert-no-icon" style="display:none; margin-top: 20px;">
+                        </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+        </div>
+      </div>
+      </div>
+      <div class="ant-layout-footer" style="text-align: center;">SingularityNET</div>
+    </div>
+    <script>
+      const BASE_URI = "https://nd9vvrqz39.execute-api.eu-west-1.amazonaws.com/production"
+      // const BASE_URI = "https://jmtb0drpvb.execute-api.eu-west-1.amazonaws.com/staging"
 
-    window.onload = function () {
-      if (location.search !== "") {
-        document.getElementById("control").style.display = "block"
-      } else {
-        document.getElementById("login").style.display = "block"
-        document.getElementById("subtitle").style.display = "block"
-      }
-    }
-    
-    function githubLogin() {
-      const xhr = new XMLHttpRequest()
-      xhr.open("GET", BASE_URI + "/appId") 
-      xhr.onload = function (e) {
-        if (xhr.readyState === 4) {
-          if (xhr.status === 200) {
-            window.location.href = "https://github.com/login/oauth/authorize?client_id=" + JSON.parse(xhr.response).clientId
-          } else {
-            const error = document.getElementById("error")
-
-            error.style.display = 'block'
-            error.innerText = "Something went wrong! Reason: " + xhr.responseText
-          }
+      window.onload = function () {
+        if (location.search !== "") {
+          document.getElementById("control").style.display = "block"
+        } else {
+          document.getElementById("login").style.display = "block"
+          document.getElementById("subtitle").style.display = "block"
         }
       }
-      xhr.send()
-    }
-    
-    function sendRequest() {
-      const button = document.getElementById("button"),
-            address = document.getElementById("input"),
-            error = document.getElementById("error"),
-            notification = document.getElementById("notification")
-      
-      error.style.display = "none"
-      notification.style.display = "none"
-      button.setAttribute("disabled", "disabled")
-      
-      if (address.value !== "" && address.value.length === 42) {
-        button.innerText = "Loading.."
 
+      function githubLogin() {
         const xhr = new XMLHttpRequest()
-        xhr.open("POST", `${BASE_URI}/agi/${location.search.split("=")[1]}/${address.value}`)
+        xhr.open("GET", BASE_URI + "/appId")
         xhr.onload = function (e) {
           if (xhr.readyState === 4) {
             if (xhr.status === 200) {
-              const response = JSON.parse(xhr.response).result,
-                    txHash = response.transactionHash || ""
-
-              notification.style.display = "block"
-              notification.innerHTML = `<p>Success! <br /> Tx Hash: <a href="https://kovan.etherscan.io/tx/${txHash}" target="_blank">${txHash}</a></p>`
+              window.location.href = "https://github.com/login/oauth/authorize?client_id=" + JSON.parse(xhr.response).clientId
             } else {
-              const reason = JSON.parse(xhr.response)
+              const error = document.getElementById("error")
 
-              error.style.display = "block"
-              error.innerHTML = "Something went wrong! Reason: " + (reason.message || reason.error_description)
+              error.style.display = 'block'
+              error.innerText = "Something went wrong! Reason: " + xhr.responseText
             }
-
-            button.innerText = "Submit"
-            button.removeAttribute("disabled")
           }
         }
         xhr.send()
-      } else {
-        error.style.display = "block"
-        button.removeAttribute("disabled")
-        error.innerHTML = "Insert a valid address"
       }
-    }
-  </script>
-</body>
 
+      function sendRequest() {
+        const button = document.getElementById("button"),
+              address = document.getElementById("input"),
+              error = document.getElementById("error"),
+              notification = document.getElementById("notification")
+
+        error.style.display = "none"
+        notification.style.display = "none"
+        button.setAttribute("disabled", "disabled")
+
+        if (address.value !== "" && address.value.length === 42) {
+          button.innerText = "Loading.."
+
+          const xhr = new XMLHttpRequest()
+          xhr.open("POST", `${BASE_URI}/agi/${location.search.split("=")[1]}/${address.value}`)
+          xhr.onload = function (e) {
+            if (xhr.readyState === 4) {
+              if (xhr.status === 200) {
+                const response = JSON.parse(xhr.response).result,
+                      txHash = response.transactionHash || ""
+
+                notification.style.display = "block"
+                notification.innerHTML = `<p>Success! <br /> Tx Hash: <a href="https://kovan.etherscan.io/tx/${txHash}" target="_blank">${txHash}</a></p>`
+              } else {
+                const reason = JSON.parse(xhr.response)
+
+                error.style.display = "block"
+                error.innerHTML = "Something went wrong! Reason: " + (reason.message || reason.error_description)
+              }
+
+              button.innerText = "Submit"
+              button.removeAttribute("disabled")
+            }
+          }
+          xhr.send()
+        } else {
+          error.style.display = "block"
+          button.removeAttribute("disabled")
+          error.innerHTML = "Insert a valid address"
+        }
+      }
+    </script>
+  </body>
 </html>
