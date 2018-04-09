@@ -1,4 +1,5 @@
 {
-  "Bucket": "agi-faucet.singularitynet.io",
-  "region": "eu-west-1"
+  "Bucket": "faucet.singularitynet.io",
+  "region": "eu-west-1",
+  "backendUrl": "https://tlniidpl87.execute-api.eu-west-1.amazonaws.com/production"
 }

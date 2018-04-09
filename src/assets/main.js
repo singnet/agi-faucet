@@ -1,4 +1,5 @@
-const BASE_URI = "https://tlniidpl87.execute-api.eu-west-1.amazonaws.com/production"
+// Backend application repository: https://github.com/singnet/agi-faucet-lambda
+const { backendUrl } = require("./../../config.json") 
 
 window.onload = function () {
   if (location.search !== "") {
@@ -11,7 +12,7 @@ window.onload = function () {
 
 window.githubLogin = () => {
   const xhr = new XMLHttpRequest()
-  xhr.open("GET", BASE_URI + "/appId")
+  xhr.open("GET", backendUrl + "/appId")
   xhr.onload = function (e) {
     if (xhr.readyState === 4) {
       if (xhr.status === 200) {
@@ -41,7 +42,7 @@ window.sendRequest = () => {
     button.innerText = "Loading.."
 
     const xhr = new XMLHttpRequest()
-    xhr.open("POST", `${BASE_URI}/agi/${location.search.split("=")[1]}/${address.value}`)
+    xhr.open("POST", `${backendUrl}/agi/${location.search.split("=")[1]}/${address.value}`)
     xhr.onload = function (e) {
       if (xhr.readyState === 4) {
         if (xhr.status === 200) {
