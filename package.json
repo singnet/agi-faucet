@@ -5,6 +5,8 @@
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
     "start": "npm run clean && parcel ./src/index.html",
+    "watch": "npm run clean && parcel watch ./src/index.html",
+    "serve": "node_modules/.bin/http-server dist & npm run watch",
     "build": "npm run clean && parcel build ./src/index.html --no-source-maps",
     "clean": "node ./scripts/clean.js",
     "deploy": "npm run build && node ./scripts/deploy.js"
@@ -24,6 +26,7 @@
     "antd": "^3.4.1",
     "aws-sdk": "^2.222.1",
     "mime-types": "^2.1.18",
-    "parcel-bundler": "^1.7.0"
+    "parcel-bundler": "^1.7.0",
+    "http-server": "0.11.1"
   }
 }
