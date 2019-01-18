@@ -72,7 +72,7 @@ function sendRequest(network) {
             const reason = JSON.parse(xhr.response)
 
             error.style.display = "block"
-            error.innerHTML = "Something went wrong! Reason: " + (reason.error && reason.error.message || reason.message || reason.error_description)
+            error.innerHTML = "Something went wrong! Reason: " + (reason.error && reason.error.message || reason.message || reason.error && reason.error_description)
           }
 
           button.innerText = "Submit"
