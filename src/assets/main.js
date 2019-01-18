@@ -1,5 +1,5 @@
 // Backend application repository: https://github.com/singnet/agi-faucet-lambda
-const { backendUrl } = require("./../../config.json") 
+const { backendUrl } = require("./../../config.json")
 
 window.onload = function () {
   if (location.search !== "") {
@@ -14,7 +14,7 @@ window.githubLogin = () => {
   const xhr = new XMLHttpRequest()
   xhr.open("GET", backendUrl + "/appId")
   xhr.onload = function (e) {
-    if (xhr.readyState === 4) {
+    if (xhr.readyState === 4) {
       if (xhr.status === 200) {
         window.location.href = "https://github.com/login/oauth/authorize?client_id=" + JSON.parse(xhr.response).clientId
       } else {
@@ -28,11 +28,19 @@ window.githubLogin = () => {
   xhr.send()
 }
 
-window.sendRequest = () => {
+window.sendKovan = () => {
+  sendRequest("kovan")
+}
+
+window.sendRopsten = () => {
+  sendRequest("ropsten")
+}
+
+function sendRequest(network) {
   const button = document.getElementById("button"),
-        address = document.getElementById("input"),
-        error = document.getElementById("error"),
-        notification = document.getElementById("notification")
+    address = document.getElementById("input"),
+    error = document.getElementById("error"),
+    notification = document.getElementById("notification")
 
   error.style.display = "none"
   notification.style.display = "none"
@@ -41,28 +49,43 @@ window.sendRequest = () => {
   if (address.value !== "" && address.value.length === 42) {
     button.innerText = "Loading.."
 
-    const xhr = new XMLHttpRequest()
-    xhr.open("POST", `${backendUrl}/agi/${location.search.split("=")[1]}/${address.value}`)
-    xhr.onload = function (e) {
-      if (xhr.readyState === 4) {
-        if (xhr.status === 200) {
-          const response = JSON.parse(xhr.response).result,
-                txHash = response.transactionHash || ""
+    try {
+      const xhr = new XMLHttpRequest()
+      xhr.open("POST", `${backendUrl}/agi`)
 
-          notification.style.display = "block"
-          notification.innerHTML = `<p>Success! <br /> Tx Hash: <a href="https://kovan.etherscan.io/tx/${txHash}" target="_blank">${txHash}</a></p>`
-        } else {
-          const reason = JSON.parse(xhr.response)
+      xhr.onload = function (e) {
+        if (xhr.readyState === 4) {
+          if (xhr.status === 200) {
 
-          error.style.display = "block"
-          error.innerHTML = "Something went wrong! Reason: " + (reason.message || reason.error_description)
+            const response = JSON.parse(xhr.response).result,
+              txHash = response.transactionHash || ""
+
+           const etherscanURI = network === 'mainnet' ? `etherscan.io` : `${network}.etherscan.io`
+            notification.style.display = "block"
+            notification.innerHTML = `<p>Success! <br /> Tx Hash: <a href="https://${etherscanURI}/tx/${txHash}" target="_blank">${txHash}</a></p>`
+
+          } else {
+            const reason = JSON.parse(xhr.response)
+
+            error.style.display = "block"
+            error.innerHTML = "Something went wrong! Reason: " + (reason.message || reason.error_description)
+          }
+
+          button.innerText = "Submit"
+          button.removeAttribute("disabled")
         }
-
-        button.innerText = "Submit"
-        button.removeAttribute("disabled")
       }
+      xhr.send(JSON.stringify({
+        network,
+        code: location.search.split("=")[1],
+        address: address.value
+      }))
+    } catch (e) {
+      error.style.display = "block"
+      button.removeAttribute("disabled")
+      error.innerHTML = "Error"
+      console.log(e)
     }
-    xhr.send()
   } else {
     error.style.display = "block"
     button.removeAttribute("disabled")
