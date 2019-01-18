@@ -1,113 +1,188 @@
 <!DOCTYPE html>
 <html lang="en">
-  <head>
-    <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-    <meta name="theme-color" content="#000000">
-    <link rel="icon" type="image/x-icon" href="./assets/favicon.ico" />
-    <link rel="stylesheet" href="./assets/style.css" />
-    <title>AGI Faucet</title>
-    <!-- Global site tag (gtag.js) - Google Analytics -->
-    <script async src="https://www.googletagmanager.com/gtag/js?id=UA-107763881-6"></script>
-    <script>
-      window.dataLayer = window.dataLayer || [];
-      function gtag(){dataLayer.push(arguments);}
-      gtag('js', new Date());
 
-      gtag('config', 'UA-107763881-6');
-    </script>
-  </head>
-  <body>
-    <noscript>
-      You need to enable JavaScript to run this app.
-    </noscript>
-    <div class="ant-layout" style="min-height: 100vh;">
-      <div class="ant-layout-header" style="background: rgb(35, 13, 58);">
-        <div class="logo">
-          <img src="assets/logo.svg" alt="SingularityNET" />
-        </div>
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+  <meta name="theme-color" content="#000000">
+  <link rel="icon" type="image/x-icon" href="./assets/favicon.ico" />
+  <link rel="stylesheet" href="./assets/style.css" />
+  <title>AGI Faucet</title>
+  <!-- Global site tag (gtag.js) - Google Analytics -->
+  <script async src="https://www.googletagmanager.com/gtag/js?id=UA-107763881-6"></script>
+  <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag() { dataLayer.push(arguments); }
+    gtag('js', new Date());
+
+    gtag('config', 'UA-107763881-6');
+  </script>
+</head>
+
+<body>
+  <noscript>
+    You need to enable JavaScript to run this app.
+  </noscript>
+  <div class="ant-layout" style="min-height: 100vh;">
+    <div class="ant-layout-header" style="background: rgb(35, 13, 58);">
+      <div class="logo">
+        <img src="assets/logo.svg" alt="SingularityNET" />
       </div>
-      <div class="ant-layout-content">
-        <div class="ant-row-flex ant-row-flex-center">
-          <div
-            class="ant-col-xs-24 ant-col-sm-24 ant-col-md-22 ant-col-lg-15 ant-col-xl-18"
-            style="margin-top: 40px;"
-          >
-            <div class="ant-row">
-              <div class="ant-card ant-card-bordered ant-card-wider-padding">
-                <div class="ant-card-head">
-                  <div class="ant-card-head-wrapper">
-                    <div class="ant-card-head-title">
-                      <i class="anticon anticon-gift"></i>
-                      <div class="ant-divider ant-divider-vertical"></div>
-                        AGI Faucet
-                    </div>
-                    <div class="ant-card-extra">
-                        <a href="https://github.com/singnet/agi-faucet/blob/master/README.md" target="_blank">
-                          README
-                        </a>
-                    </div>
+    </div>
+    <div class="ant-layout-content">
+      <div class="ant-row-flex ant-row-flex-center">
+        <div class="ant-col-xs-24 ant-col-sm-24 ant-col-md-22 ant-col-lg-15 ant-col-xl-18" style="margin-top: 40px;">
+          <div class="ant-row">
+            <div class="ant-card ant-card-bordered ant-card-wider-padding">
+              <div class="ant-card-head">
+                <div class="ant-card-head-wrapper">
+                  <div class="ant-card-head-title">
+                    <i class="anticon anticon-gift"></i>
+                    <div class="ant-divider ant-divider-vertical"></div>
+                    AGI Faucet
+                  </div>
+                  <div class="ant-card-extra">
+                    <a href="https://github.com/singnet/agi-faucet/blob/master/README.md" target="_blank">
+                      README
+                    </a>
                   </div>
                 </div>
-                <div class="ant-card-body">
-                  <div class="ant-row-flex ant-row-flex-space-around ant-row-flex-middle">
-                    <div class="ant-col-xs-24 ant-col-sm-7 ant-col-md-7 ant-col-lg-7 ant-col-xl-7">
-                      <p>
-                        Network
-                        <div class="ant-divider ant-divider-vertical"></div>
-                        <div class="ant-tag">Kovan</div>
-                      </p>
-                      <p>
-                        Token
-                        <div class="ant-divider ant-divider-vertical"></div>
-                        <div class="ant-tag">
-                          <a href="https://kovan.etherscan.io/token/0x3b226ff6aad7851d3263e53cb7688d13a07f6e81#readContract">
-                            <b>SingularityNET</b>
-                          </a>
-                        </div>
-                      </p>
+              </div>
+              <div class="ant-card-body">
+                <div class="ant-row-flex ant-row-flex-space-around ant-row-flex-middle">
+                  <div class="ant-col-xs-24 ant-col-sm-7 ant-col-md-7 ant-col-lg-7 ant-col-xl-7">
+                    <p>
+                      Network
+                      <form id="networks">
+                        <label class="container">Ropsten
+                          <input type="radio" checked="checked" name="radio" value="ropsten">
+                          <span class="checkmark"></span>
+                        </label>
+                        <label class="container">Kovan
+                          <input type="radio" name="radio" value="kovan">
+                          <span class="checkmark"></span>
+                        </label>
+                      </form>
+                    </p>
+                  </div>
+                  <div class="ant-col-xs-24 ant-col-sm-7 ant-col-md-7 ant-col-lg-7 ant-col-xl-7">
+                    <p>
+                      Token
+                      <div class="ant-divider ant-divider-vertical"></div>
+                      <div class="ant-tag">
+                        <a href="https://kovan.etherscan.io/token/0x3b226ff6aad7851d3263e53cb7688d13a07f6e81#readContract">
+                          <b>SingularityNET</b>
+                        </a>
+                      </div>
+                    </p>
+                    <p>
+                      Symbol
+                      <div class="ant-divider ant-divider-vertical"></div>
+                      <div class="ant-tag">AGI</div>
+                    </p>
+                    <p>
+                      Decimals
+                      <div class="ant-divider ant-divider-vertical"></div>
+                      <div class="ant-tag">8</div>
+                    </p>
+                  </div>
+                  <div class="ant-col-xs-24 ant-col-sm-10 ant-col-md-10 ant-col-lg-10 ant-col-xl-10" style="margin-top: 30px; margin-bottom: 30px;">
+                    <div id="control" style="display: none">
+                      <input id="input" type="text" style="width: 100%" placeholder="Enter your ETH address" class="ant-input">
+                      <button id="button" type="button" onClick="window.sendAGI()" class="ant-btn ant-btn-primary"
+                        style="width: 100%; margin-top: 10px;">
+                        SUBMIT
+                      </button>
                     </div>
-                    <div class="ant-col-xs-24 ant-col-sm-7 ant-col-md-7 ant-col-lg-7 ant-col-xl-7">
-                      <p>
-                        Symbol
-                        <div class="ant-divider ant-divider-vertical"></div>
-                        <div class="ant-tag">AGI</div>
-                      </p>
-                      <p>
-                        Decimals
-                        <div class="ant-divider ant-divider-vertical"></div>
-                        <div class="ant-tag">8</div>
-                      </p>
+                    <div id="subtitle" class="ant-alert ant-alert-info ant-alert-no-icon" style="display: none;">
+                      <span class="ant-alert-message">
+                        You need a GitHub account to get your AGI
+                      </span>
                     </div>
-                    <div class="ant-col-xs-24 ant-col-sm-10 ant-col-md-10 ant-col-lg-10 ant-col-xl-10" style="margin-top: 30px; margin-bottom: 30px;">
-                        <div id="control" style="display: none">
-                          <input id="input" type="text" style="width: 100%" placeholder="Enter your ETH address" class="ant-input">
-                          <button id="button" type="button" onClick="window.sendKovan()" class="ant-btn ant-btn-primary" style="width: 100%; margin-top: 10px;">
-                            SUBMIT
-                          </button>
-                        </div>
-                        <div id="subtitle" class="ant-alert ant-alert-info ant-alert-no-icon" style="display: none;">
-                          <span class="ant-alert-message">
-                            You need a GitHub account to get your AGI
-                          </span>
-                        </div>
-                        <button type="button" id="login" onClick="window.githubLogin()" class="ant-btn ant-btn-primary" style="width: 100%; margin-top: 10px; display: none;">
-                          LOGIN
-                        </button>
-                        <div id="notification" class="ant-alert ant-alert-warning ant-alert-no-icon" style="display:none; margin-top: 20px;">
-                        </div>
-                        <div id="error" class="ant-alert ant-alert-error ant-alert-no-icon" style="display:none; margin-top: 20px;">
-                        </div>
+                    <button type="button" id="login" onClick="window.githubLogin()" class="ant-btn ant-btn-primary"
+                      style="width: 100%; margin-top: 10px; display: none;">
+                      LOGIN
+                    </button>
+                    <div id="notification" class="ant-alert ant-alert-warning ant-alert-no-icon" style="display:none; margin-top: 20px;">
+                    </div>
+                    <div id="error" class="ant-alert ant-alert-error ant-alert-no-icon" style="display:none; margin-top: 20px;">
                     </div>
                   </div>
                 </div>
               </div>
             </div>
+          </div>
         </div>
       </div>
-      </div>
-      <div class="ant-layout-footer" style="text-align: center;">SingularityNET</div>
     </div>
-    <script src="./assets/main.js"></script>
-  </body>
+    <div class="ant-layout-footer" style="text-align: center;">SingularityNET</div>
+  </div>
+  <script src="./assets/main.js"></script>
+  <style>
+    /* The container */
+    .container {
+      display: block;
+      position: relative;
+      padding-left: 35px;
+      margin-bottom: 12px;
+      cursor: pointer;
+      font-size: 22px;
+      -webkit-user-select: none;
+      -moz-user-select: none;
+      -ms-user-select: none;
+      user-select: none;
+    }
+
+    /* Hide the browser's default radio button */
+    .container input {
+      position: absolute;
+      opacity: 0;
+      cursor: pointer;
+    }
+
+    /* Create a custom radio button */
+    .checkmark {
+      position: absolute;
+      top: 0;
+      left: 0;
+      height: 25px;
+      width: 25px;
+      background-color: #eee;
+      border-radius: 10%;
+    }
+
+    /* On mouse-over, add a grey background color */
+    .container:hover input~.checkmark {
+      background-color: #ccc;
+    }
+
+    /* When the radio button is checked, add a blue background */
+    .container input:checked~.checkmark {
+      background-color: #2196F3;
+    }
+
+    /* Create the indicator (the dot/circle - hidden when not checked) */
+    .checkmark:after {
+      content: "";
+      position: absolute;
+      display: none;
+    }
+
+    /* Show the indicator (dot/circle) when checked */
+    .container input:checked~.checkmark:after {
+      display: block;
+    }
+
+    /* Style the indicator (dot/circle) */
+    .container .checkmark:after {
+      top: 9px;
+      left: 9px;
+      width: 8px;
+      height: 8px;
+      border-radius: 50%;
+      background: white;
+    }
+  </style>
+</body>
+
 </html>

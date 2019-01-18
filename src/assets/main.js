@@ -28,12 +28,16 @@ window.githubLogin = () => {
   xhr.send()
 }
 
-window.sendKovan = () => {
-  sendRequest("kovan")
-}
+window.sendAGI = () => {
+  const radio = document.getElementsByName('radio');
+  let network;
+  for (let i = 0; i < radio.length; i++) {
+    if (radio[i].checked) {
+      network = radio[i].value;
+    }
+  }
 
-window.sendRopsten = () => {
-  sendRequest("ropsten")
+  sendRequest(network)
 }
 
 function sendRequest(network) {
@@ -60,7 +64,7 @@ function sendRequest(network) {
             const response = JSON.parse(xhr.response).result,
               txHash = response.transactionHash || ""
 
-           const etherscanURI = network === 'mainnet' ? `etherscan.io` : `${network}.etherscan.io`
+            const etherscanURI = network === 'mainnet' ? `etherscan.io` : `${network}.etherscan.io`
             notification.style.display = "block"
             notification.innerHTML = `<p>Success! <br /> Tx Hash: <a href="https://${etherscanURI}/tx/${txHash}" target="_blank">${txHash}</a></p>`
 
