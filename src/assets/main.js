@@ -66,6 +66,8 @@ function sendRequest(network) {
 
             const etherscanURI = network === 'mainnet' ? `etherscan.io` : `${network}.etherscan.io`
             notification.style.display = "block"
+            notification.style.wordWrap = "break-word"
+            notification.style.overflowWrap = "break-word"
             notification.innerHTML = `<p>Success! <br /> Tx Hash: <a href="https://${etherscanURI}/tx/${txHash}" target="_blank">${txHash}</a></p>`
 
           } else {
