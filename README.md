@@ -8,10 +8,8 @@ You can request 1 AGIX token every 24 hours.
 - Decimals `8`
 
 ### Token contracts for each testnet
-- [x] Kovan [0x3b226ff6aad7851d3263e53cb7688d13a07f6e81](https://kovan.etherscan.io/token/0x3b226ff6aad7851d3263e53cb7688d13a07f6e81)   
-- [ ] Rinkeby  
-- [x] Ropsten [0xb97E9bBB6fd49865709d3F1576e8506ad640a13B](https://ropsten.etherscan.io/token/0xb97E9bBB6fd49865709d3F1576e8506ad640a13B)   
-
+- [x] Kovan [0x20802d1a9581b94e51db358C09e0818d6bd071b4](https://kovan.etherscan.io/token/0x20802d1a9581b94e51db358C09e0818d6bd071b4)    
+- [x] Ropsten [0xA1e841e8F770E5c9507E2f8cfd0aA6f73009715d](https://ropsten.etherscan.io/token/0xA1e841e8F770E5c9507E2f8cfd0aA6f73009715d)   
 
 ## Development instructions
 * Install [Node.js and npm](https://nodejs.org/)
