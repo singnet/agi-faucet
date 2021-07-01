@@ -1,10 +1,10 @@
-# AGI Faucet
+# AGIX Faucet
 
-## How to receive AGI tokens in testnet
-Login using your GitHub account and input the Ethereum address where you want to receive the AGI token.  
-You can request 1 AGI token every 24 hours.
+## How to receive AGIX tokens in testnet
+Login using your GitHub account and input the Ethereum address where you want to receive the AGIX token.  
+You can request 1 AGIX token every 24 hours.
 
-- Symbol `AGI`
+- Symbol `AGIX`
 - Decimals `8`
 
 ### Token contracts for each testnet
