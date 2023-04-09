@@ -1,12 +1,20 @@
 // Backend application repository: https://github.com/singnet/agi-faucet-lambda
 const { backendUrl } = require("./../../config.json")
 
-window.onload = function () {
+window.connect = async() => {
+  const button = document.getElementById("connect");
+  const showAccount = document.querySelector('.showAccount');
+  const provider = new ethers.providers.Web3Provider(window.ethereum);
+  account = await provider.send("eth_requestAccounts", []);
+  const signer = await provider.getSigner().getAddress();
+  console.log(signer);
+  showAccount.innerHTML = signer;
+  button.innerHTML = "CONNECTED";
+}
+
+window.onload = async function () {
   if (location.search !== "") {
     document.getElementById("control").style.display = "block"
-  } else {
-    document.getElementById("login").style.display = "block"
-    document.getElementById("subtitle").style.display = "block"
   }
 }
 
