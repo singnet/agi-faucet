@@ -4,9 +4,11 @@ const abi = JSON.parse('[{"inputs":[{"internalType":"address","name":"_agixToken
 window.connect = async() => {
   const button = document.getElementById("connect");
   const showAccount = document.querySelector('.showAccount');
+
   const provider = new ethers.providers.Web3Provider(window.ethereum);
   account = await provider.send("eth_requestAccounts", []);
   const signer = await provider.getSigner().getAddress();
+
   console.log(signer);
   showAccount.innerHTML = signer;
   button.innerHTML = "CONNECTED";
@@ -19,13 +21,19 @@ window.onload = async function () {
 }
 
 window.requsetTokens = async() => {
-  notification = document.getElementById("notification");
+  const notification = document.getElementById("notification");
+  const error = document.getElementById("error");
+
+  notification.style.display = "none";
+  error.style.display = "none";
+
   const provider = new ethers.providers.Web3Provider(window.ethereum);
-  console.log('provider');
+  console.log('get provider');
   const signer = await provider.getSigner();
-  console.log('signer');
+  console.log('get signer');
   const contract = new ethers.Contract('0x19570fbC4e05940960b0A44C5f771008Af7935A2', abi, signer);
-  console.log('contract');
+  console.log('get contract');
+
   const radio = document.getElementsByName('radio');
   let token;
   for (let i = 0; i < radio.length; i++) {
@@ -34,14 +42,25 @@ window.requsetTokens = async() => {
     }
   }
   console.log(token);
+
   if (token === 'agix') {
-    tx = await contract.requestTokens(0);
-    notification.style.display = "block"
-    notification.innerHTML = `<p>Success! <br />Hash: <a href="https://goerli.etherscan.io/tx/${tx.hash}" target="_blank">${tx.hash}</a></p>`
+    try {
+      tx = await contract.requestTokens(0);
+      notification.style.display = "block";
+      notification.innerHTML = `<p>Success AGIX send! <br />Hash: <a href="https://goerli.etherscan.io/tx/${tx.hash}" target="_blank">${tx.hash}</a></p>`;
+    } catch(err) {
+      error.style.display = "block";
+      error.innerHTML = `<p>${err.message} Try again</p>`;
+    }
   } else {
-    await contract.requestTokens(1);
-    notification.style.display = "block"
-    notification.innerHTML = `<p>Success!</p>`
+    try {
+      tx = await contract.requestTokens(1);
+      notification.style.display = "block";
+      notification.innerHTML = `<p>Success RJV send! <br />Hash: <a href="https://goerli.etherscan.io/tx/${tx.hash}" target="_blank">${tx.hash}</a></p>`;
+    } catch(err) {
+      error.style.display = "block";
+      error.innerHTML = `<p>${err.message} Try again</p>`;
+    }
   }
 }
 

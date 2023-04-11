@@ -55,9 +55,7 @@
                     <p>
                       Network
                       <form id="networks">
-                        <label class="container">Goerli
-                          <input type="radio" checked="checked" name="radio" value="goerli">
-                          <span class="checkmark"></span>
+                        <label class="container"><b>Goerli</b>
                         </label>
                         <label class="container">Sepolia(in development)
                         </label>
@@ -67,7 +65,7 @@
                   <div class="ant-col-xs-24 ant-col-sm-7 ant-col-md-7 ant-col-lg-7 ant-col-xl-7">
                     <p>
                       Token
-                      <form id="networks">
+                      <form id="tokens">
                         <label class="container">AGIX
                           <input type="radio" checked="checked" name="radio" value="agix">
                           <span class="checkmark"></span>
@@ -81,13 +79,13 @@
                   </div>
                   <div class="ant-col-xs-24 ant-col-sm-10 ant-col-md-10 ant-col-lg-10 ant-col-xl-10" style="margin-top: 30px; margin-bottom: 30px;">
                     <div id="control">
+                      <h3>Account: <span class="showAccount"></span></h3>
                       <button id="connect" type="button" onClick="connect()" class="ant-btn ant-btn-primary"
-                        style="width: 100%; margin-top: 10px;">
+                        style="width: 100%; height: 40px; margin-top: 5px;">
                         CONNECT WALLET
                       </button>
-                      <h3>Account: <span class="showAccount"></span></h3>
                       <button id="button" type="button" onClick="window.requsetTokens()" class="ant-btn ant-btn-primary"
-                        style="width: 100%; margin-top: 10px;">
+                        style="width: 100%; height: 40px; margin-top: 30px;">
                         GET TOKENS
                       </button>
                     </div>
