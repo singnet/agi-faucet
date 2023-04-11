@@ -38,7 +38,6 @@
               <div class="ant-card-head">
                 <div class="ant-card-head-wrapper">
                   <div class="ant-card-head-title">
-                    <i class="anticon anticon-gift"></i>
                     <div class="ant-divider ant-divider-vertical"></div>
                     Faucet by SingularityNET
                   </div>
@@ -57,7 +56,7 @@
                       <form id="networks">
                         <label class="container"><b>Goerli</b>
                         </label>
-                        <label class="container">Sepolia(in development)
+                        <label class="container" style="color: #bdbdbd">Sepolia(in development)
                         </label>
                       </form>
                     </p>
@@ -79,7 +78,7 @@
                   </div>
                   <div class="ant-col-xs-24 ant-col-sm-10 ant-col-md-10 ant-col-lg-10 ant-col-xl-10" style="margin-top: 30px; margin-bottom: 30px;">
                     <div id="control">
-                      <h3>Account: <span class="showAccount"></span></h3>
+                      <h3 style="word-wrap: break-word;">Account: <span class="showAccount"></span></h3>
                       <button id="connect" type="button" onClick="connect()" class="ant-btn ant-btn-primary"
                         style="width: 100%; height: 40px; margin-top: 5px;">
                         CONNECT WALLET
@@ -129,7 +128,7 @@
     /* Create a custom radio button */
     .checkmark {
       position: absolute;
-      top: 0;
+      top: 5px;
       left: 0;
       height: 25px;
       width: 25px;
