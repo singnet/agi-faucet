@@ -1,6 +1,6 @@
-# AGIX Faucet
+# SingularityNET token faucet
 
-## How to receive AGIX tokens in testnet
+## How to receive AGIX or RJV tokens in testnet?
 Connect your wallet to the test network and get >50 AGIX or RJV tokens 
 You can request >50 AGIX or >50 RJV tokens every 1 hour or other time period.
 
