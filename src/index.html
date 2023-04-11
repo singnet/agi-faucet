@@ -55,13 +55,11 @@
                     <p>
                       Network
                       <form id="networks">
-                        <label class="container">Sepolia
-                          <input type="radio" checked="checked" name="radio" value="sepolia">
+                        <label class="container">Goerli
+                          <input type="radio" checked="checked" name="radio" value="goerli">
                           <span class="checkmark"></span>
                         </label>
-                        <label class="container">Preprod
-                          <input type="radio" name="radio" value="preprod">
-                          <span class="checkmark"></span>
+                        <label class="container">Sepolia(in development)
                         </label>
                       </form>
                     </p>
@@ -88,12 +86,12 @@
                         CONNECT WALLET
                       </button>
                       <h3>Account: <span class="showAccount"></span></h3>
-                      <button id="button" type="button" onClick="window.sendAGI()" class="ant-btn ant-btn-primary"
+                      <button id="button" type="button" onClick="window.requsetTokens()" class="ant-btn ant-btn-primary"
                         style="width: 100%; margin-top: 10px;">
-                        SUBMIT
+                        GET TOKENS
                       </button>
                     </div>
-                    <div id="notification" class="ant-alert ant-alert-warning ant-alert-no-icon" style="display:none; margin-top: 20px;">
+                    <div id="notification" class="ant-alert ant-alert-success ant-alert-no-icon" style="display:none; margin-top: 20px;">
                     </div>
                     <div id="error" class="ant-alert ant-alert-error ant-alert-no-icon" style="display:none; margin-top: 20px;">
                     </div>
