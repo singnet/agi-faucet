@@ -1,15 +1,18 @@
-# AGIX Faucet
+# SingularityNET token faucet
 
-## How to receive AGIX tokens in testnet
-Login using your GitHub account and input the Ethereum address where you want to receive the AGIX token.  
-You can request 1 AGIX token every 24 hours.
+## How to receive AGIX or RJV tokens in testnet?
+Connect your wallet to the test network and get >50 AGIX or RJV tokens 
+You can request >50 AGIX or >50 RJV tokens every 1 hour or other time period.
 
 - Symbol `AGIX`
 - Decimals `8`
 
-### Token contracts for each testnet
-- [x] Kovan [0x20802d1a9581b94e51db358C09e0818d6bd071b4](https://kovan.etherscan.io/token/0x20802d1a9581b94e51db358C09e0818d6bd071b4)    
-- [x] Ropsten [0xA1e841e8F770E5c9507E2f8cfd0aA6f73009715d](https://ropsten.etherscan.io/token/0xA1e841e8F770E5c9507E2f8cfd0aA6f73009715d)   
+- Symbol `RJV`
+- Decimals `6`
+
+### Faucet token contract for each testnet
+- [x] Goerli [0x19570fbC4e05940960b0A44C5f771008Af7935A2](https://goerli.etherscan.io/address/0x19570fbC4e05940960b0A44C5f771008Af7935A2) (LTS ending in dec 2023)
+- [x] Sepolia - In develop   
 
 ## Development instructions
 * Install [Node.js and npm](https://nodejs.org/)

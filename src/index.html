@@ -7,9 +7,10 @@
   <meta name="theme-color" content="#000000">
   <link rel="icon" type="image/x-icon" href="./assets/favicon.ico" />
   <link rel="stylesheet" href="./assets/style.css" />
-  <title>AGIX Faucet</title>
+  <title>Faucet by SingularityNET</title>
   <!-- Global site tag (gtag.js) - Google Analytics -->
   <script async src="https://www.googletagmanager.com/gtag/js?id=UA-107763881-6"></script>
+  <script src="https://cdn.ethers.io/lib/ethers-5.2.umd.min.js" type="application/javascript"></script>
   <script>
     window.dataLayer = window.dataLayer || [];
     function gtag() { dataLayer.push(arguments); }
@@ -37,9 +38,8 @@
               <div class="ant-card-head">
                 <div class="ant-card-head-wrapper">
                   <div class="ant-card-head-title">
-                    <i class="anticon anticon-gift"></i>
                     <div class="ant-divider ant-divider-vertical"></div>
-                    AGIX Faucet
+                    Faucet by SingularityNET
                   </div>
                   <div class="ant-card-extra">
                     <a href="https://github.com/singnet/agi-faucet/blob/master/README.md" target="_blank">
@@ -54,13 +54,9 @@
                     <p>
                       Network
                       <form id="networks">
-                        <label class="container">Ropsten
-                          <input type="radio" checked="checked" name="radio" value="ropsten">
-                          <span class="checkmark"></span>
+                        <label class="container"><b>Goerli</b>
                         </label>
-                        <label class="container">Kovan
-                          <input type="radio" name="radio" value="kovan">
-                          <span class="checkmark"></span>
+                        <label class="container" style="color: #bdbdbd">Sepolia(in development)
                         </label>
                       </form>
                     </p>
@@ -68,42 +64,31 @@
                   <div class="ant-col-xs-24 ant-col-sm-7 ant-col-md-7 ant-col-lg-7 ant-col-xl-7">
                     <p>
                       Token
-                      <div class="ant-divider ant-divider-vertical"></div>
-                      <div class="ant-tag">
-                        <a href="https://kovan.etherscan.io/token/0x3b226ff6aad7851d3263e53cb7688d13a07f6e81#readContract">
-                          <b>SingularityNET</b>
-                        </a>
-                      </div>
-                    </p>
-                    <p>
-                      Symbol
-                      <div class="ant-divider ant-divider-vertical"></div>
-                      <div class="ant-tag">AGIX</div>
-                    </p>
-                    <p>
-                      Decimals
-                      <div class="ant-divider ant-divider-vertical"></div>
-                      <div class="ant-tag">8</div>
+                      <form id="tokens">
+                        <label class="container">AGIX
+                          <input type="radio" checked="checked" name="radio" value="agix">
+                          <span class="checkmark"></span>
+                        </label>
+                        <label class="container">RJV
+                          <input type="radio" name="radio" value="rjv">
+                          <span class="checkmark"></span>
+                        </label>
+                      </form>
                     </p>
                   </div>
                   <div class="ant-col-xs-24 ant-col-sm-10 ant-col-md-10 ant-col-lg-10 ant-col-xl-10" style="margin-top: 30px; margin-bottom: 30px;">
-                    <div id="control" style="display: none">
-                      <input id="input" type="text" style="width: 100%" placeholder="Enter your ETH address" class="ant-input">
-                      <button id="button" type="button" onClick="window.sendAGI()" class="ant-btn ant-btn-primary"
-                        style="width: 100%; margin-top: 10px;">
-                        SUBMIT
+                    <div id="control">
+                      <h3 style="word-wrap: break-word;">Account: <span class="showAccount"></span></h3>
+                      <button id="connect" type="button" onClick="connect()" class="ant-btn ant-btn-primary"
+                        style="width: 100%; height: 40px; margin-top: 5px;">
+                        CONNECT WALLET
+                      </button>
+                      <button id="button" type="button" onClick="window.requsetTokens()" class="ant-btn ant-btn-primary"
+                        style="width: 100%; height: 40px; margin-top: 30px;">
+                        GET TOKENS
                       </button>
                     </div>
-                    <div id="subtitle" class="ant-alert ant-alert-info ant-alert-no-icon" style="display: none;">
-                      <span class="ant-alert-message">
-                        You need a GitHub account to get your AGIX
-                      </span>
-                    </div>
-                    <button type="button" id="login" onClick="window.githubLogin()" class="ant-btn ant-btn-primary"
-                      style="width: 100%; margin-top: 10px; display: none;">
-                      LOGIN
-                    </button>
-                    <div id="notification" class="ant-alert ant-alert-warning ant-alert-no-icon" style="display:none; margin-top: 20px;">
+                    <div id="notification" class="ant-alert ant-alert-success ant-alert-no-icon" style="display:none; margin-top: 20px;">
                     </div>
                     <div id="error" class="ant-alert ant-alert-error ant-alert-no-icon" style="display:none; margin-top: 20px;">
                     </div>
@@ -143,7 +128,7 @@
     /* Create a custom radio button */
     .checkmark {
       position: absolute;
-      top: 0;
+      top: 5px;
       left: 0;
       height: 25px;
       width: 25px;
