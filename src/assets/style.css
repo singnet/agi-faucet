@@ -1,1 +1,26 @@
 @import "./../../node_modules/antd/dist/antd.min.css"; 
+
+.ant-row-flex-middle {
+    align-items: flex-start !important;
+}
+
+#networks .container{
+    padding-left: 0 !important;
+}
+
+.ant-layout-header {
+    padding: 0 !important;  
+}
+
+.logo {
+    display: flex;
+    align-items: center;
+    padding: 0 50px !important;  
+    width: 75% !important;
+    height: 100% !important;
+}
+
+.logo img {
+    height: 80% !important;
+    display: block;
+}

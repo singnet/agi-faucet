@@ -1,63 +1,106 @@
-// Backend application repository: https://github.com/singnet/agi-faucet-lambda
-const abi = JSON.parse('[{"inputs":[{"internalType":"address","name":"_agixTokenAddress","type":"address"},{"internalType":"address","name":"_rejuveTokenAddress","type":"address"}],"stateMutability":"payable","type":"constructor"},{"anonymous":false,"inputs":[{"indexed":true,"internalType":"address","name":"to","type":"address"},{"indexed":true,"internalType":"uint256","name":"amount","type":"uint256"}],"name":"Distribution","type":"event"},{"anonymous":false,"inputs":[{"indexed":true,"internalType":"address","name":"previousOwner","type":"address"},{"indexed":true,"internalType":"address","name":"newOwner","type":"address"}],"name":"OwnershipTransferred","type":"event"},{"anonymous":false,"inputs":[{"indexed":true,"internalType":"address","name":"to","type":"address"},{"indexed":true,"internalType":"uint256","name":"amount","type":"uint256"}],"name":"Withdrawal","type":"event"},{"inputs":[],"name":"agixToken","outputs":[{"internalType":"contract IERC20","name":"","type":"address"}],"stateMutability":"view","type":"function"},{"inputs":[],"name":"agixWithdrawalAmount","outputs":[{"internalType":"uint256","name":"","type":"uint256"}],"stateMutability":"view","type":"function"},{"inputs":[],"name":"getBalance","outputs":[{"internalType":"uint256","name":"agixBalance","type":"uint256"},{"internalType":"uint256","name":"rejuveBalance","type":"uint256"}],"stateMutability":"view","type":"function"},{"inputs":[],"name":"lockTime","outputs":[{"internalType":"uint256","name":"","type":"uint256"}],"stateMutability":"view","type":"function"},{"inputs":[],"name":"owner","outputs":[{"internalType":"address","name":"","type":"address"}],"stateMutability":"view","type":"function"},{"inputs":[],"name":"rejuveToken","outputs":[{"internalType":"contract IERC20","name":"","type":"address"}],"stateMutability":"view","type":"function"},{"inputs":[],"name":"rejuveWithdrawalAmount","outputs":[{"internalType":"uint256","name":"","type":"uint256"}],"stateMutability":"view","type":"function"},{"inputs":[],"name":"renounceOwnership","outputs":[],"stateMutability":"nonpayable","type":"function"},{"inputs":[{"internalType":"uint8","name":"_tokenId","type":"uint8"}],"name":"requestTokens","outputs":[],"stateMutability":"nonpayable","type":"function"},{"inputs":[{"internalType":"uint256","name":"amount","type":"uint256"}],"name":"setLockTime","outputs":[],"stateMutability":"nonpayable","type":"function"},{"inputs":[{"internalType":"uint256","name":"amount","type":"uint256"}],"name":"setWithdrawalAmount","outputs":[],"stateMutability":"nonpayable","type":"function"},{"inputs":[{"internalType":"address","name":"newOwner","type":"address"}],"name":"transferOwnership","outputs":[],"stateMutability":"nonpayable","type":"function"},{"inputs":[],"name":"withdraw","outputs":[],"stateMutability":"nonpayable","type":"function"}]');
+ABI// Backend application repository: https://github.com/singnet/agi-faucet-lambda
+import ABI from "./abi.json";
+
+const currentNetwork = "SEPOLIA";
+const contractAddress = "0xB6E2421746BF4c5d941755c6272F9f2661282F78";
+const provider = new ethers.providers.Web3Provider(window.ethereum);
+
+const networks = {
+  SEPOLIA: {
+    id: "0xaa36a7",
+    name: "sepolia"
+  }
+}
+
+const tokens = {
+    agix: {
+      id: 0,
+      name: "AGIX",
+    },
+    rjv: {
+      id: 1,
+      name: "RJV",
+    },
+};
+
+const createNotification = (tokenName, txHash) => {
+    return (
+      `<p>
+        Success! ${tokenName} send! <br/>
+        Hash: 
+          <a href="https://${networks[currentNetwork].name}.etherscan.io/tx/${txHash}" target="_blank">
+            ${txHash}
+          </a>
+      </p>`
+    );
+};
+
+const validateNetworkId = async () => {
+  const chainId = await provider.send("eth_chainId");
+
+  if (chainId !== networks[currentNetwork].id) {
+    await provider.send(
+      'wallet_switchEthereumChain',
+      [{ chainId: networks[currentNetwork].id }], // chainId must be in hexadecimal numbers
+    );
+  }
+}
 
 window.connect = async () => {
-  const button = document.getElementById("connect");
-  const showAccount = document.querySelector('.showAccount');
+    const connectButton = document.querySelector("#connect");
+    const accountBlock = document.querySelector("#account");
 
-  const provider = new ethers.providers.Web3Provider(window.ethereum);
-  account = await provider.send("eth_requestAccounts", []);
-  const signer = await provider.getSigner().getAddress();
+    await validateNetworkId();
 
-  console.log(signer);
-  showAccount.innerHTML = signer;
-  button.innerHTML = "CONNECTED";
-}
+    const account = await provider.send("eth_requestAccounts", []);
+    const signerAddress = await provider.getSigner().getAddress();
+
+    console.log("accounts", account);
+    console.log("Signer address", signerAddress);
+
+    accountBlock.innerHTML = signerAddress;
+    connectButton.innerHTML = "CONNECTED";
+};
 
 window.onload = async function () {
-  if (location.search !== "") {
-    document.getElementById("control").style.display = "block"
-  }
-}
-
-window.requsetTokens = async () => {
-  const notification = document.getElementById("notification");
-  const error = document.getElementById("error");
-
-  notification.style.display = "none";
-  error.style.display = "none";
-
-  const provider = new ethers.providers.Web3Provider(window.ethereum);
-  const signer = await provider.getSigner();
-  const contract = new ethers.Contract('0x19570fbC4e05940960b0A44C5f771008Af7935A2', abi, signer);
-
-  const radio = document.getElementsByName('radio');
-  let token;
-  for (let i = 0; i < radio.length; i++) {
-    if (radio[i].checked) {
-      token = radio[i].value;
+    if (location.search !== "") {
+        document.getElementById("control").style.display = "block";
     }
-  }
-  console.log(token);
+};
 
-  if (token === 'agix') {
+window.requestTokens = async () => {
+    let token;
+    const radioButtons = document.getElementsByName("tokensRadio");
+    const notificationBlock = document.querySelector("#notification");
+    const errorBlock = document.querySelector("#error");
+
+    notificationBlock.style.display = "none";
+    errorBlock.style.display = "none";
+
+    const provider = new ethers.providers.Web3Provider(window.ethereum);
+    const signer = await provider.getSigner();
+    const contract = new ethers.Contract(
+        contractAddress,
+        ABI,
+        signer
+    );
+
+    for (let i = 0; i < radioButtons.length; i++) {
+        if (radioButtons[i].checked) {
+            token = radioButtons[i].value;
+        }
+    }
+
+    console.log("Selected token", token);
+
     try {
-      tx = await contract.requestTokens(0);
-      notification.style.display = "block";
-      notification.innerHTML = `<p>Success AGIX send! <br/>Hash: <a href="https://goerli.etherscan.io/tx/${tx.hash}" target="_blank">${tx.hash}</a></p>`;
-    } catch(err) {
-      error.style.display = "block";
-      error.innerHTML = `<p>${err.message} Try again</p>`;
-    }
-  } else {
-    try {
-      tx = await contract.requestTokens(1);
-      notification.style.display = "block";
-      notification.innerHTML = `<p>Success RJV send! <br/>Hash: <a href="https://goerli.etherscan.io/tx/${tx.hash}" target="_blank">${tx.hash}</a></p>`;
-    } catch(err) {
-      error.style.display = "block";
-      error.innerHTML = `<p>${err.message} Try again</p>`;
-    }
+      await validateNetworkId();
+      const currentToken = tokens[token];
+      const tx = await contract.requestTokens(currentToken.id);
+      notificationBlock.style.display = "block";
+      notificationBlock.innerHTML = createNotification(currentToken.name, tx.hash);
+    } catch (error) {
+      errorBlock.style.display = "block";
+      errorBlock.innerHTML = `<p>${error.message} <br> Please, try again</p>`;
   }
-}
-
+};
