@@ -63,7 +63,8 @@ try {
     };
 
     window.connect = async () => {
-        if (!window?.ethereum?.isMetaMask) {
+        console.log("window.ethereum.isMetaMask", window?.ethereum.isMetaMask);
+        if (!window?.ethereum.isMetaMask) {
             throw new Error("The metamask is not found");
         }
 
