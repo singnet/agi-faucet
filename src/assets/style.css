@@ -24,3 +24,17 @@
     height: 80% !important;
     display: block;
 }
+
+.ant-alert {
+    padding: 15px 24px !important;
+}
+
+.ant-alert p{
+   margin-bottom: 0;
+}
+
+.no-overflow {
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+}

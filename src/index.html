@@ -75,23 +75,23 @@
                   </div>
                   <div class="ant-col-xs-24 ant-col-sm-10 ant-col-md-10 ant-col-lg-10 ant-col-xl-10" style="margin-top: 30px; margin-bottom: 30px;">
                     <div id="control">
-                      <h3 style="word-wrap: break-word;">Account: <span class="showAccount" id="account"></span></h3>
+                      <h3 style="word-wrap: break-word;" id="account" class="no-overflow"><span class="showAccount"></span></h3>
                       <button id="connect" type="button" onClick="connect()" class="ant-btn ant-btn-primary"
                         style="width: 100%; height: 40px; margin-top: 5px;">
                         CONNECT WALLET
                       </button>
-                      <button id="button" type="button" onClick="window.requestTokens()" class="ant-btn ant-btn-primary"
+                      <button id="get-tokens" type="button" onClick="window.requestTokens()" class="ant-btn ant-btn-primary"
                         style="width: 100%; height: 40px; margin-top: 30px;">
                         GET TOKENS
                       </button>
                     </div>
-                    <div id="notification" class="ant-alert ant-alert-success ant-alert-no-icon" style="display:none; margin-top: 20px;">
-                    </div>
-                    <div id="error" class="ant-alert ant-alert-error ant-alert-no-icon" style="display:none; margin-top: 20px;">
-                    </div>
                   </div>
                 </div>
               </div>
+            </div>
+            <div id="notification" class="ant-alert ant-alert-success ant-alert-no-icon" style="display:none; margin-top: 20px;">
+            </div>
+            <div id="error" class="ant-alert ant-alert-error ant-alert-no-icon" style="display:none; margin-top: 20px;">
             </div>
           </div>
         </div>
