@@ -38,3 +38,13 @@
     text-overflow: ellipsis;
     white-space: nowrap;
 }
+
+.warning-message {
+    background: #56bcc5;
+    color: #353535;
+    font-size: 16px;
+    padding: 10px 24px;
+    border-radius: 5px;
+    text-align: center;
+    margin-bottom: 25px;
+}

@@ -41,6 +41,8 @@ try {
 
     const provider = new ethers.providers.Web3Provider(window.ethereum);
 
+    console.log(provider);
+
     const createNotification = (tokenName, txHash) => {
         return `<p>
         Success! ${tokenName} send! <br/>
@@ -73,8 +75,10 @@ try {
         const account = await provider.send("eth_requestAccounts", []);
         const signerAddress = await provider.getSigner().getAddress();
 
-        if(!signerAddress) {
-          throw new Error("Could not obtain signer address! Please, try again.");
+        if (!signerAddress) {
+            throw new Error(
+                "Could not obtain signer address! Please, try again."
+            );
         }
 
         getTokensButton.disabled = false;
