@@ -15,7 +15,6 @@
     window.dataLayer = window.dataLayer || [];
     function gtag() { dataLayer.push(arguments); }
     gtag('js', new Date());
-
     gtag('config', 'UA-107763881-6');
   </script>
 </head>
@@ -24,6 +23,22 @@
   <noscript>
     You need to enable JavaScript to run this app.
   </noscript>
+  <div class="warning-modal" id="warning-modal">
+    <div class="modal-content">
+      <p>
+        If you once connected a coinbase wallet to the bridge, and now you want to connect the metamask wallet extension, but coinbase wallet is automatically connected, then these instructions are for you.
+      </p>
+      <p>
+        Right click on not Metamask Extension icon -> This can read and change site data -> When you click the extension
+      </p>
+      <div class="coinbase-instructions-image-holder">
+        <img src="/assets/coinbase.png" alt="">
+      </div>
+      <button class="ant-btn ant-btn-primary confirm-warning" onclick="window.confirmUnderstand()">
+        I UNDERSTAND
+      </button>
+    </div>
+  </div>
   <div class="ant-layout" style="min-height: 100vh;">
     <div class="ant-layout-header" style="background: rgb(35, 13, 58);">
       <div class="logo">
@@ -31,7 +46,6 @@
       </div>
     </div>
     <div class="ant-layout-content">
-      
       <div class="ant-row-flex ant-row-flex-center">
         <div class="ant-col-xs-24 ant-col-sm-24 ant-col-md-22 ant-col-lg-15 ant-col-xl-18" style="margin-top: 40px;">
           <div class="ant-row">

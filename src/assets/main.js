@@ -22,12 +22,17 @@ const tokens = {
     },
 };
 
+const warningModal = document.querySelector("#warning-modal");
 const connectButton = document.querySelector("#connect");
 const getTokensButton = document.querySelector("#get-tokens");
 const accountBlock = document.querySelector("#account");
 const notificationBlock = document.querySelector("#notification");
 const errorBlock = document.querySelector("#error");
 const radioButtons = document.getElementsByName("tokensRadio");
+
+window.confirmUnderstand = () => {
+    warningModal.style.display = "none";
+}
 
 try {
     getTokensButton.disabled = true;
