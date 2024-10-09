@@ -44,7 +44,7 @@ try {
         );
     }
 
-    const provider = new ethers.providers.Web3Provider(window.ethereum);
+    const provider = new ethers.BrowserProvider(window?.ethereum);
 
     console.log(provider);
 
@@ -78,7 +78,8 @@ try {
         await validateNetworkId();
 
         const account = await provider.send("eth_requestAccounts", []);
-        const signerAddress = await provider.getSigner().getAddress();
+        const signer = await provider.getSigner();
+        const signerAddress = await signer.getAddress();
 
         if (!signerAddress) {
             throw new Error(
@@ -108,7 +109,7 @@ try {
         notificationBlock.style.display = "none";
         errorBlock.style.display = "none";
 
-        const provider = new ethers.providers.Web3Provider(window.ethereum);
+        const provider = new ethers.BrowserProvider(window?.ethereum);
         const signer = await provider.getSigner();
         const contract = new ethers.Contract(contractAddress, ABI, signer);
 
