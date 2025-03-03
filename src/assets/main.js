@@ -2,7 +2,7 @@ ABI; // Backend application repository: https://github.com/singnet/agi-faucet-la
 import ABI from "./abi.json";
 
 const currentNetwork = "SEPOLIA";
-const contractAddress = "0xB6E2421746BF4c5d941755c6272F9f2661282F78";
+const contractAddress = "0xc2bAFEedc4dAea8587B67cd0EfBAaE940713e83D";
 
 const networks = {
     SEPOLIA: {
@@ -14,7 +14,7 @@ const networks = {
 const tokens = {
     agix: {
         id: 0,
-        name: "AGIX",
+        name: "FET",
     },
     rjv: {
         id: 1,
