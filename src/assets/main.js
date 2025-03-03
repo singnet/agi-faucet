@@ -12,7 +12,7 @@ const networks = {
 };
 
 const tokens = {
-    agix: {
+    fet: {
         id: 0,
         name: "FET",
     },

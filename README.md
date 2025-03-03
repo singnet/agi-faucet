@@ -1,12 +1,12 @@
 # SingularityNET Token Faucet
 
-## How to receive AGIX or RJV tokens in testnet?
-#### Connect your wallet to the test network and get 1000+ AGIX or RJV tokens 
-#### You can request >1000 AGIX or >1000 RJV tokens every 1 hour or other time period.
+## How to receive ASI(FET) or RJV tokens in testnet?
+#### Connect your wallet to the test network and get 50+ ASI(FET) or RJV tokens 
+#### You can request >50 ASI(FET) or >50 RJV tokens every 1 hour or other time period.
 ---
-- Symbol `AGIX`
-- Decimals `8`
-- Address: [0xf703b9aB8931B6590CFc95183be4fEf278732016](https://sepolia.etherscan.io/address/0xf703b9aB8931B6590CFc95183be4fEf278732016)
+- Symbol `ASI(FET)`
+- Decimals `18`
+- Address: [0x3A54192862D1c52C8175d4912f1f778d1E3C2449](https://sepolia.etherscan.io/address/0x3A54192862D1c52C8175d4912f1f778d1E3C2449)
 ---
 - Symbol `RJV`
 - Decimals `6`
@@ -15,7 +15,7 @@
 
 ### Faucet tokens contract for Sepolia testnet
 - [x] Sepolia:
-[0xB6E2421746BF4c5d941755c6272F9f2661282F78](https://sepolia.etherscan.io/address/0xB6E2421746BF4c5d941755c6272F9f2661282F78)
+[0xc2bAFEedc4dAea8587B67cd0EfBAaE940713e83D](https://sepolia.etherscan.io/address/0xc2bAFEedc4dAea8587B67cd0EfBAaE940713e83D)
 
 ## Development instructions
 * Install [Node.js and npm](https://nodejs.org/)
